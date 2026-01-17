@@ -21,7 +21,21 @@ def neff(weights):
 
 
 
-def run_pf_no_resample(
+def systematic_resample(particles, weights, rng):
+
+    N = len(particles)
+
+    positions = (rng.random() + np.arange(N)) / N
+
+    cumsum = np.cumsum(weights)
+
+    idx = np.searchsorted(cumsum, positions)
+
+    return particles[idx]
+
+
+
+def run_pf_with_resample(
 
     T=60,
 
@@ -38,6 +52,8 @@ def run_pf_no_resample(
     sigma_obs=0.7,
 
     seed=0,
+
+    resample_ratio=0.5,   # Neff < resample_ratio*N でリサンプル
 
 ):
 
@@ -81,9 +97,23 @@ def run_pf_no_resample(
 
 
 
+        n_eff = neff(weights)
+
+
+
+        # 退化してたらリサンプル
+
+        if n_eff < resample_ratio * N:
+
+            particles = systematic_resample(particles, weights, rng)
+
+            weights = np.ones(N) / N
+
+
+
         if t % 10 == 0 or t == T - 1:
 
-            print("t=", t, "Neff=", round(neff(weights), 1), "/", N)
+            print("t=", t, "Neff=", round(n_eff, 1), "/", N)
 
 
 
@@ -93,9 +123,9 @@ def run_pf_no_resample(
 
 if __name__ == "__main__":
 
-    x_true, x_est = run_pf_no_resample()
+    x_true, x_est = run_pf_with_resample()
 
     rmse = np.sqrt(np.mean((x_true - x_est) ** 2))
 
-    print("RMSE (no resample) =", rmse)
+    print("RMSE (resample) =", rmse)
 
