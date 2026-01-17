@@ -11,17 +11,13 @@ from models import observation_likelihood_range_1d
 
 def predict_particles(particles, u, sigma_move, rng):
 
-    """運動モデル（予測ステップ）: x <- x + u + N(0, sigma_move^2)"""
-
     return particles + u + rng.normal(0.0, sigma_move, size=particles.shape)
 
 
 
 def neff(weights):
 
-    """有効サンプルサイズ Neff = 1 / sum(w^2)"""
-
-    return 1.0 / np.sum(np.square(weights))
+    return 1.0 / np.sum(weights * weights)
 
 
 
@@ -43,8 +39,6 @@ def run_pf_no_resample(
 
     seed=0,
 
-    verbose=True,
-
 ):
 
     rng = np.random.default_rng(seed)
@@ -62,8 +56,6 @@ def run_pf_no_resample(
     particles = rng.uniform(x0_min, x0_max, size=N)
 
     weights = np.ones(N) / N
-
-
 
     x_est = np.zeros(T)
 
@@ -89,9 +81,9 @@ def run_pf_no_resample(
 
 
 
-        if verbose and (t % 10 == 0 or t == T-1):
+        if t % 10 == 0 or t == T - 1:
 
-            print(f"t={t:02d}  Neff={neff(weights):.1f}/{N}")
+            print("t=", t, "Neff=", round(neff(weights), 1), "/", N)
 
 
 
