@@ -17,6 +17,14 @@ def predict_particles(particles, u, sigma_move, rng):
 
 
 
+def neff(weights):
+
+    """有効サンプルサイズ Neff = 1 / sum(w^2)"""
+
+    return 1.0 / np.sum(np.square(weights))
+
+
+
 def run_pf_no_resample(
 
     T=60,
@@ -35,13 +43,13 @@ def run_pf_no_resample(
 
     seed=0,
 
+    verbose=True,
+
 ):
 
     rng = np.random.default_rng(seed)
 
 
-
-    # 真値生成（観測zも使う）
 
     x_true, u, z = simulate_1d(
 
@@ -50,8 +58,6 @@ def run_pf_no_resample(
     )
 
 
-
-    # 粒子初期化（prior）
 
     particles = rng.uniform(x0_min, x0_max, size=N)
 
@@ -71,13 +77,7 @@ def run_pf_no_resample(
 
 
 
-        # 観測で重み更新（尤度）
-
         w = observation_likelihood_range_1d(z[t], particles, landmark, sigma_obs)
-
-
-
-        # underflow対策（ゼロ割回避）
 
         w = w + 1e-300
 
@@ -85,9 +85,13 @@ def run_pf_no_resample(
 
 
 
-        # 推定：重み付き平均
-
         x_est[t] = np.sum(particles * weights)
+
+
+
+        if verbose and (t % 10 == 0 or t == T-1):
+
+            print(f"t={t:02d}  Neff={neff(weights):.1f}/{N}")
 
 
 
