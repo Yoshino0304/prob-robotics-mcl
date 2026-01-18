@@ -29,12 +29,12 @@
 **予測（prediction）**
 ```math
 \bar{bel}(x_t) = \int p(x_t \mid x_{t-1}, u_t)\, bel(x_{t-1})\, dx_{t-1}
-
+```
 
 **更新（correction）**
 ```math
-bel(x_t) = \eta \, p(z_t \mid x_t)\, \bar{bel}(x_t)
-
+\bel(x_t) = \eta \, p(z_t \mid x_t)\, \bar{bel}(x_t)
+```
 ここで $\eta$ は正規化定数
 
 
