@@ -54,7 +54,6 @@ x_t^{(i)} \sim p(x_t \mid x_{t-1}^{(i)}, u_t)
 
 ```math
 \tilde{w}_t^{(i)} = w_{t-1}^{(i)}\, p(z_t \mid x_t^{(i)})
-
 ```
 重みは合計が1になるように正規化
 ```math
@@ -69,7 +68,8 @@ w_t^{(i)} = \frac{\tilde{w}_t^{(i)}}{\sum_{j=1}^{N} \tilde{w}_t^{(j)}}
 N_{\mathrm{eff}} = \frac{1}{\sum_{i=1}^{N} (w_t^{(i)})^2}
 ```
 
-本実装では $N_{\mathrm{eff}}$ が小さいときにリサンプリング
+本実装では $N_{\mathrm{eff}} < \frac{N}{2}$ のときにリサンプリングを行う。
+
 ### リサンプリング（systematic resampling）
 リサンプリングでは、確率 $w_t^{(i)}$ に比例して粒子を複製
 本実装では systematic resampling を用いている
@@ -78,6 +78,10 @@ N_{\mathrm{eff}} = \frac{1}{\sum_{i=1}^{N} (w_t^{(i)})^2}
 ### systematic resampling の手順（概要）
 systematic resampling は、重みに比例した粒子の複製を効率よく行う手法である
 累積分布（CDF）を使って、等間隔にサンプルを取る
+
+```math
+c_i = \sum_{k=1}^{i} w_t^{(k)}
+```
 
 手順は以下のようになっている
 
