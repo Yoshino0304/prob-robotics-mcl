@@ -9,13 +9,13 @@
 - 出力画像は `src/outputs/` に保存されます
 
 ## インストール方法
-git clone https://github.com/Yoshino0304/prob-robotics-mcl.git
+` git clone https://github.com/Yoshino0304/prob-robotics-mcl.git` 
 
 ## MCL実行
-cd src
-python3 mcl.py
+` cd src` 
+` python3 mcl.py` 
 
 ## 結果の図を生成
-python3 plot.py
+` python3 plot.py` 
 
 
