@@ -27,10 +27,10 @@ python3 plot.py
 横軸が時刻 t 、縦軸が1次元位置 x です。  
 **true** がシミュレーション上の真値、**estimate** がMCLによる推定値を表します。
 
-<img src="src/outputs/trajectory.png" width="600">
+<img src="src/outputs/trajectory.png" width="500">
 
 ### 推定誤差（error）
 推定誤差 **error = estimate - true**の時間変化です。  
 0に近いほど推定が正確で、タイトルにRMSE（誤差の平均的な大きさ）を表示します。
 
-<img src="src/outputs/error.png" width="600">
+<img src="src/outputs/error.png" width="500">
