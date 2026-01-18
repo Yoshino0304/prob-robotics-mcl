@@ -8,6 +8,27 @@
 - 本実装は **1次元** の簡易設定です
 - 出力画像は `src/outputs/` に保存されます
 
+## 実装内容（MCLの流れ）
+本実装では以下の手順で自己位置推定を行います。  
+1. **予測**：運動モデルで粒子を移動  
+2. **計測更新**：観測尤度により粒子の重みを更新  
+3. **リサンプリング**：Neffが小さいときにsystematic resamplingを実行
+
+## モデル
+- 運動モデル：`x_t = x_{t-1} + u_t + N(0, σ_move^2)`
+- 観測モデル：`z_t = |L - x_t| + N(0, σ_obs^2)`
+
+## ファイル構成
+- `src/sim.py`：真値と観測の生成
+- `src/models.py`：観測尤度（計測モデル）
+- `src/mcl.py`：MCL本体（Neff + resampling）
+- `src/plot.py`：結果の図を保存
+
+## 参考
+- 上田先生『詳解 確率ロボティクス』の第8章、MCL（予測→計測更新→リサンプリング）の流れを参考にしました。
+- 上田 隆一『詳解 確率ロボティクス Pythonによる基礎アルゴリズムの実装（KS理工学専門書）』  
+  https://www.amazon.co.jp/dp/4065170060
+
 ## インストール方法
 ```bash
 git clone https://github.com/Yoshino0304/prob-robotics-mcl.git
