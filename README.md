@@ -9,7 +9,9 @@
 - 出力画像は `src/outputs/` に保存されます
 
 ## インストール方法
-` git clone https://github.com/Yoshino0304/prob-robotics-mcl.git` 
+```bash
+git clone https://github.com/Yoshino0304/prob-robotics-mcl.git
+```
 
 ## MCL実行
 ```bash
@@ -18,6 +20,7 @@ python3 mcl.py
 ```
 
 ## 結果の図を生成
-` python3 plot.py` 
-
+```bash
+python3 plot.py 
+```
 
