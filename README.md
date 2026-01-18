@@ -32,6 +32,8 @@
 ## インストール方法
 ```bash
 git clone https://github.com/Yoshino0304/prob-robotics-mcl.git
+cd prob-robotics-mcl
+pip3 install -r requirements.txt
 ```
 
 ## MCL実行
@@ -55,3 +57,12 @@ python3 plot.py
 0に近いほど推定が正確で、タイトルにRMSE（誤差の平均的な大きさ）を表示します。
 
 <img src="src/outputs/error.png" width="500">
+
+## 必要なソフトウェア
+- Python 3.8 以上（動作確認：Python 3.8.10）
+
+## 動作確認済み環境
+- Ubuntu 20.04
+
+## ライセンス
+MIT License
