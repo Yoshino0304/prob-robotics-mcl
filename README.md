@@ -65,4 +65,4 @@ python3 plot.py
 - Ubuntu 20.04
 
 ## ライセンス
-MIT License
+3-Clause BSD License（LICENSE参照）
