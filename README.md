@@ -12,8 +12,10 @@
 ` git clone https://github.com/Yoshino0304/prob-robotics-mcl.git` 
 
 ## MCL実行
-` cd src` 
-` python3 mcl.py` 
+```bash
+cd src
+python3 mcl.py
+
 
 ## 結果の図を生成
 ` python3 plot.py` 
