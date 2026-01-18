@@ -15,7 +15,7 @@
 ```bash
 cd src
 python3 mcl.py
-
+```
 
 ## 結果の図を生成
 ` python3 plot.py` 
