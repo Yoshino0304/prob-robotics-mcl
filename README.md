@@ -14,6 +14,32 @@
 2. **計測更新**：観測尤度により粒子の重みを更新  
 3. **リサンプリング**：Neffが小さいときにsystematic resamplingを実行
 
+## アルゴリズム解説（数式）
+
+### 問題設定
+状態（ロボット位置）を $x_t$、制御入力を $u_t$、観測を $z_t$ とする。  
+本実装は1次元なので $x_t \in \mathbb{R}$。
+
+- 運動モデル： $p(x_t \mid x_{t-1}, u_t)$  
+- 観測モデル： $p(z_t \mid x_t)$
+
+### ベイズフィルタ（予測・更新）
+事後分布 $bel(x_t)=p(x_t \mid z_{1:t}, u_{1:t})$ は以下で更新
+
+**予測（prediction）**
+$$
+\bar{bel}(x_t) = \int p(x_t \mid x_{t-1}, u_t)\, bel(x_{t-1})\, dx_{t-1}
+$$
+
+**更新（correction）**
+$$
+bel(x_t) = \eta \, p(z_t \mid x_t)\, \bar{bel}(x_t)
+$$
+ここで $\eta$ は正規化定数
+
+
+
+
 ## モデル
 - 運動モデル：`x_t = x_{t-1} + u_t + N(0, σ_move^2)`
 - 観測モデル：`z_t = |L - x_t| + N(0, σ_obs^2)`
