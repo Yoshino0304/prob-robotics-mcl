@@ -65,4 +65,6 @@ python3 plot.py
 - Ubuntu 20.04
 
 ## ライセンス
-3-Clause BSD License（LICENSE参照）
+- このソフトウェアパッケージは、3条項BSDライセンスの下、再頒布および使用が許可されます。
+- © 2026 Taiki Yoshino
+
