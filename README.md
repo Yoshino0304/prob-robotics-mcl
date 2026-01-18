@@ -18,9 +18,19 @@ git clone https://github.com/Yoshino0304/prob-robotics-mcl.git
 cd src
 python3 mcl.py
 ```
-
-## 結果の図を生成
+## 結果
+### 結果の図を生成
 ```bash
 python3 plot.py 
 ```
+### 真値と推定（trajectory）
+横軸が時刻 `t`、縦軸が1次元位置 `x` です。  
+`true` がシミュレーション上の真値、`estimate` がMCLによる推定値を表します。
 
+![](src/outputs/trajectory.png)
+
+### 推定誤差（error）
+推定誤差 `error = estimate - true` の時間変化です。  
+0に近いほど推定が正確で、タイトルにRMSE（誤差の平均的な大きさ）を表示します。
+
+![](src/outputs/error.png)
